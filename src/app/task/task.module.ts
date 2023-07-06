@@ -10,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, taskFeatureKey } from './store/reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { TaskEffects } from './store/effects/task.effects';
+import { FormControlsModule } from '../shared/module/form-controls/form-controls.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { TaskEffects } from './store/effects/task.effects';
     CommonModule,
     TaskRoutingModule,
     ReactiveFormsModule,
+    FormControlsModule,
     StoreModule.forFeature(taskFeatureKey, reducers),
     EffectsModule.forFeature([TaskEffects]),
   ],

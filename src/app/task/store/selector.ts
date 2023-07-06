@@ -3,7 +3,7 @@ import { ITaskState } from '../types/task-state.interface';
 
 const taskFeatureSelector = createFeatureSelector<ITaskState>('tasks');
 
-export const errorResponseSelector = createSelector(
+export const isSavingSelector = createSelector(
   taskFeatureSelector,
-  (state: ITaskState) => state.errors
+  (state: ITaskState) => state.isSaving
 );

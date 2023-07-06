@@ -1,0 +1,17 @@
+<label for="title">{{ label }}</label>
+<input
+  [type]="type"
+  class="form-control"
+  [placeholder]="placeholder"
+  [formControl]="control"
+/>
+<ng-container *ngIf="control.invalid && (control.touched || control.dirty)">
+  <span *ngIf="control.errors?.required" class="badge text-bg-danger"
+    >{{ label }} is required</span
+  >
+  <span *ngIf="control.errors?.minlength" class="badge text-bg-danger"
+    >{{ label }} you entered is
+    {{ control.errors?.minlength.actualLength }} characters long. it must be
+    {{ control.errors?.minlength.requiredLength }}</span
+  >
+</ng-container>

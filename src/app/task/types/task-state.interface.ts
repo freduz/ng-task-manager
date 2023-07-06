@@ -5,5 +5,4 @@ export interface ITaskState {
   tasks: ITask[];
   isLoading: boolean;
   isSaving: boolean;
-  errors: IErrorResponse | undefined;
 }

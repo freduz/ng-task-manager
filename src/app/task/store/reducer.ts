@@ -10,7 +10,6 @@ export const initialState: ITaskState = {
   tasks: [],
   isLoading: false,
   isSaving: false,
-  errors: undefined,
 };
 
 export const taskFeatureKey = 'tasks';
@@ -34,10 +33,9 @@ const taskReducer = createReducer(
   ),
   on(
     addTaskFailureTask,
-    (state, { errors }): ITaskState => ({
+    (state): ITaskState => ({
       ...state,
       isSaving: false,
-      errors: errors,
     })
   )
 );

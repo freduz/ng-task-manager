@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TaskHomeComponent } from './components/task-home/task-home.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
+import { deactivateGuard } from '../core/guards/deactivate.guard';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
       {
         path: 'add',
         component: AddTaskComponent,
+        canDeactivate: [deactivateGuard],
       },
     ],
   },

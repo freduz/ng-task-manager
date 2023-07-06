@@ -14,10 +14,7 @@ export const addTaskSuccessAction = createAction(
   props<{ task: ITaskResponse }>()
 );
 
-export const addTaskFailureTask = createAction(
-  ActionTypes.SAVE_TASK_FAILURE,
-  props<{ errors: IErrorResponse }>()
-);
+export const addTaskFailureTask = createAction(ActionTypes.SAVE_TASK_FAILURE);
 
 export const loadAllTasksAction = createAction(
   ActionTypes.LOAD_ALL_TASKS,

@@ -1,9 +1,3 @@
-<!-- <div class="d-flex flex-column">
-  <div class="heading-area"></div>
-  <div class="form-area">
-
-  </div>
-</div> -->
 <div class="container add-task-form">
   <div class="row">
     <div class="col">
@@ -14,33 +8,20 @@
     <div class="col">
       <form [formGroup]="taskForm" (ngSubmit)="saveTask()">
         <div class="form-group">
-          <label for="title">Title</label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            placeholder="Enter title"
-            formControlName="title"
-          />
+          <tm-input
+            [control]="title"
+            label="Title"
+            placeholder="Enter the title"
+          ></tm-input>
         </div>
         <div class="form-group">
-          <label for="description">Description</label>
-          <textarea
-            class="form-control"
-            id="description"
-            rows="3"
-            placeholder="Enter description"
-            formControlName="description"
-          ></textarea>
+          <tm-text-area
+            [control]="description"
+            label="Description"
+          ></tm-text-area>
         </div>
         <div class="form-group">
-          <label for="dueDate">Due Date</label>
-          <input
-            type="date"
-            class="form-control"
-            id="dueDate"
-            formControlName="dueDate"
-          />
+          <tm-input type="date" label="Due Date" [control]="dueDate"></tm-input>
         </div>
         <div class="form-group">
           <label for="status">Status</label>
@@ -56,7 +37,7 @@
             class="btn btn-primary"
             [disabled]="taskForm.invalid"
           >
-            Add Task
+            Save Task
           </button>
         </div>
       </form>

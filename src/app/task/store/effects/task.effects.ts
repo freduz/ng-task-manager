@@ -6,11 +6,13 @@ import {
   addTaskFailureTask,
   addTaskSuccessAction,
 } from '../actions/task.actions';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { ITask } from '../../types/task.interface';
+import { catchError, map, of, switchMap, tap, throwError } from 'rxjs';
+
 import { ITaskResponse } from '../../types/task-response.interface';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ToasterService } from 'src/app/shared/services/toaster.service';
+import { Store } from '@ngrx/store';
+import { IAppState } from 'src/app/shared/module/top-bar/types/app-state.interface';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Injectable()
 export class TaskEffects {
@@ -22,21 +24,21 @@ export class TaskEffects {
           map((task: ITaskResponse) => {
             return addTaskSuccessAction({ task });
           }),
+          tap((_) => {}),
           catchError((error: HttpErrorResponse) => {
-            return of(addTaskFailureTask({ errors: error.error }));
+            this._store.dispatch(addTaskFailureTask());
+            return throwError(error);
           })
         );
       })
     )
   );
 
-  afterSuccessFullAddEffect$ = createEffect(
+  afterTaskAddSuccessEffect$ = createEffect(
     () =>
       this._actions$.pipe(
         ofType(addTaskSuccessAction),
-        tap(() => {
-          this._toastrService.showSucces('Your task added successfully!');
-        })
+        tap((_) => this._notificationService.showSuccess('Task saved success!'))
       ),
     {
       dispatch: false,
@@ -46,6 +48,7 @@ export class TaskEffects {
   constructor(
     private _actions$: Actions,
     private _taskService: TaskService,
-    private _toastrService: ToasterService
+    private _store: Store<IAppState>,
+    private _notificationService: NotificationService
   ) {}
 }
