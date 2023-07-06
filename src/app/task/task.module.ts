@@ -5,6 +5,11 @@ import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskItemComponent } from './components/task-item/task-item.component';
 import { TaskHomeComponent } from './components/task-home/task-home.component';
 import { TaskRoutingModule } from './task-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { reducers, taskFeatureKey } from './store/reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { TaskEffects } from './store/effects/task.effects';
 
 @NgModule({
   declarations: [
@@ -13,6 +18,12 @@ import { TaskRoutingModule } from './task-routing.module';
     TaskItemComponent,
     TaskHomeComponent,
   ],
-  imports: [CommonModule, TaskRoutingModule],
+  imports: [
+    CommonModule,
+    TaskRoutingModule,
+    ReactiveFormsModule,
+    StoreModule.forFeature(taskFeatureKey, reducers),
+    EffectsModule.forFeature([TaskEffects]),
+  ],
 })
 export class TaskModule {}
