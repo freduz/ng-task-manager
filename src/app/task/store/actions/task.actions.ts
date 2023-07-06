@@ -16,12 +16,13 @@ export const addTaskSuccessAction = createAction(
 
 export const addTaskFailureTask = createAction(ActionTypes.SAVE_TASK_FAILURE);
 
-export const loadAllTasksAction = createAction(
-  ActionTypes.LOAD_ALL_TASKS,
-  props<{ errors: IErrorResponse }>()
-);
+export const loadAllTasksAction = createAction(ActionTypes.LOAD_ALL_TASKS);
 
-export const LOAD_ALL_TASKS_SUCCESS = createAction(
+export const loadAllTasksSuccessAction = createAction(
   ActionTypes.LOAD_ALL_TASKS_SUCCESS,
   props<{ tasks: ITaskResponse[] }>()
+);
+
+export const loadAllCoursesFailureAction = createAction(
+  ActionTypes.LOAD_ALL_TASKS_FAILURE
 );

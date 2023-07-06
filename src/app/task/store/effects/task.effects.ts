@@ -5,6 +5,8 @@ import {
   addTaskAction,
   addTaskFailureTask,
   addTaskSuccessAction,
+  loadAllTasksAction,
+  loadAllTasksSuccessAction,
 } from '../actions/task.actions';
 import { catchError, map, of, switchMap, tap, throwError } from 'rxjs';
 
@@ -28,6 +30,19 @@ export class TaskEffects {
           catchError((error: HttpErrorResponse) => {
             this._store.dispatch(addTaskFailureTask());
             return throwError(error);
+          })
+        );
+      })
+    )
+  );
+
+  loadAllTasksEffect$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadAllTasksAction),
+      switchMap((_) => {
+        return this._taskService.getAll().pipe(
+          map((tasks) => {
+            return loadAllTasksSuccessAction({ tasks });
           })
         );
       })

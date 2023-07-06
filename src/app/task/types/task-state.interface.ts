@@ -5,4 +5,5 @@ export interface ITaskState {
   tasks: ITask[];
   isLoading: boolean;
   isSaving: boolean;
+  tasksLoaded: boolean;
 }

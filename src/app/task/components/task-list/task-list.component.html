@@ -1,1 +1,6 @@
-<p>task-list works!</p>
+<div class="task-list">
+  <tm-task-item
+    *ngFor="let task of tasks$ | async"
+    [task]="task"
+  ></tm-task-item>
+</div>

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from '../auth/components/register/register.component';
 import { LoginComponent } from '../auth/components/login/login.component';
+import { taskResolver } from '../core/resolvers/task.resolver';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
         path: '',
         loadChildren: () =>
           import('../task/task.module').then((m) => m.TaskModule),
+        resolve: { tasks: taskResolver },
       },
     ],
   },
