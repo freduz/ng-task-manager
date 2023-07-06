@@ -7,3 +7,13 @@ export const isSavingSelector = createSelector(
   taskFeatureSelector,
   (state: ITaskState) => state.isSaving
 );
+
+export const tasksSelector = createSelector(
+  taskFeatureSelector,
+  (state: ITaskState) => state.tasks
+);
+
+export const isTasksLoadedSelector = createSelector(
+  taskFeatureSelector,
+  (state: ITaskState) => state.tasksLoaded
+);

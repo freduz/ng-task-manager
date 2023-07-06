@@ -1,0 +1,26 @@
+.card {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  background: #00cc66;
+  border: none;
+  border-radius: 10px;
+}
+
+.more-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.btn-area {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+}
+
+.content-area {
+  padding: 10px;
+}

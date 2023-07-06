@@ -4,12 +4,15 @@ import {
   addTaskAction,
   addTaskFailureTask,
   addTaskSuccessAction,
+  loadAllTasksAction,
+  loadAllTasksSuccessAction,
 } from './actions/task.actions';
 
 export const initialState: ITaskState = {
   tasks: [],
   isLoading: false,
   isSaving: false,
+  tasksLoaded: false,
 };
 
 export const taskFeatureKey = 'tasks';
@@ -36,6 +39,22 @@ const taskReducer = createReducer(
     (state): ITaskState => ({
       ...state,
       isSaving: false,
+    })
+  ),
+  on(
+    loadAllTasksAction,
+    (state): ITaskState => ({
+      ...state,
+      isLoading: true,
+    })
+  ),
+  on(
+    loadAllTasksSuccessAction,
+    (state, { tasks }): ITaskState => ({
+      ...state,
+      tasks,
+      isLoading: false,
+      tasksLoaded: true,
     })
   )
 );
