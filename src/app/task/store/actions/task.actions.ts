@@ -15,7 +15,6 @@ export const addTaskSuccessAction = createAction(
 );
 
 export const addTaskFailureTask = createAction(ActionTypes.SAVE_TASK_FAILURE);
-
 export const loadAllTasksAction = createAction(ActionTypes.LOAD_ALL_TASKS);
 
 export const loadAllTasksSuccessAction = createAction(
@@ -23,6 +22,16 @@ export const loadAllTasksSuccessAction = createAction(
   props<{ tasks: ITaskResponse[] }>()
 );
 
-export const loadAllCoursesFailureAction = createAction(
+export const loadAllTasksFailureAction = createAction(
   ActionTypes.LOAD_ALL_TASKS_FAILURE
+);
+
+export const updateTaskAction = createAction(
+  ActionTypes.UPDATE_TASK,
+  props<{ task: Partial<ITask>; id: number }>()
+);
+
+export const updateTaskSuccessAction = createAction(
+  ActionTypes.UPDATE_TASK_SUCCESS,
+  props<{ task: ITaskResponse }>()
 );

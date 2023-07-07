@@ -9,14 +9,17 @@ import { Store, select } from '@ngrx/store';
 import {
   BehaviorSubject,
   Observable,
+  catchError,
   combineLatest,
   fromEvent,
+  map,
   of,
   tap,
+  throwError,
 } from 'rxjs';
 import { IAppState } from 'src/app/shared/module/top-bar/types/app-state.interface';
-import { ITask } from '../../types/task.interface';
 import { tasksSelector } from '../../store/selector';
+import { ITaskResponse } from '../../types/task-response.interface';
 
 @Component({
   selector: 'app-task-list',
@@ -24,29 +27,75 @@ import { tasksSelector } from '../../store/selector';
   styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit, AfterViewInit {
-  tasks$!: Observable<ITask[]>;
+  tasks$!: Observable<ITaskResponse[]>;
   @ViewChild('taskFilter') taskFilter!: ElementRef<HTMLSelectElement>;
-  private _statusChanger$ = new BehaviorSubject('');
+  @ViewChild('taskSort') taskSort!: ElementRef<HTMLSelectElement>;
+
+  private _filterTask$ = new BehaviorSubject('');
+  private _sortTask$ = new BehaviorSubject('');
 
   constructor(private _store: Store<IAppState>) {}
 
   ngOnInit(): void {
     this.tasks$ = this._store.pipe(select(tasksSelector));
-    combineLatest([this.tasks$, this._statusChanger$]).subscribe(
+    combineLatest([this.tasks$, this._filterTask$]).subscribe(
       ([tasks, status]) => {
-        if (status != '') {
+        if (status != 'ALL' && status != '') {
           this.tasks$ = of(tasks.filter((task) => task.status === status));
+        } else {
+          this.tasks$ = of(tasks);
         }
       }
     );
+
+    combineLatest([this.tasks$, this._sortTask$])
+      .pipe(
+        map(([tasks, sortOption]) => {
+          const sortOrder = sortOption.slice(-3);
+          const sortKey = sortOption.slice(0, -3);
+          let sortedTasks: ITaskResponse[] = tasks;
+
+          if (sortKey === 'title') {
+            sortedTasks = tasks.slice().sort((a, b) => {
+              if (sortOrder === 'Asc') {
+                return a.title.localeCompare(b.title);
+              } else {
+                return b.title.localeCompare(a.title);
+              }
+            });
+          } else if (sortKey === 'dueDate') {
+            sortedTasks = tasks.slice().sort((a, b) => {
+              const dateA = new Date(a.dueDate).getTime();
+              const dateB = new Date(b.dueDate).getTime();
+              if (sortOrder === 'Asc') {
+                return dateA - dateB;
+              } else {
+                return dateB - dateA;
+              }
+            });
+          }
+
+          return sortedTasks;
+        })
+      )
+      .subscribe((sortedTasks) => (this.tasks$ = of(sortedTasks)));
   }
 
   ngAfterViewInit(): void {
     fromEvent(this.taskFilter.nativeElement, 'change')
       .pipe(
         tap((event) => {
-          const value = (event?.target as HTMLSelectElement).value;
-          this._statusChanger$.next(value);
+          const filterValue = (event?.target as HTMLSelectElement).value;
+          this._filterTask$.next(filterValue);
+        })
+      )
+      .subscribe();
+
+    fromEvent(this.taskSort.nativeElement, 'change')
+      .pipe(
+        tap((event: Event) => {
+          const sortValue = (event.target as HTMLSelectElement).value;
+          this._sortTask$.next(sortValue);
         })
       )
       .subscribe();
