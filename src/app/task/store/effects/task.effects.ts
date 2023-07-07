@@ -7,8 +7,10 @@ import {
   addTaskSuccessAction,
   loadAllTasksAction,
   loadAllTasksSuccessAction,
+  updateTaskAction,
+  updateTaskSuccessAction,
 } from '../actions/task.actions';
-import { catchError, map, of, switchMap, tap, throwError } from 'rxjs';
+import { catchError, map, switchMap, tap, throwError } from 'rxjs';
 
 import { ITaskResponse } from '../../types/task-response.interface';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -30,6 +32,30 @@ export class TaskEffects {
           catchError((error: HttpErrorResponse) => {
             this._store.dispatch(addTaskFailureTask());
             return throwError(error);
+          })
+        );
+      })
+    )
+  );
+
+  afterUpdateSuccessEffect$ = createEffect(
+    () =>
+      this._actions$.pipe(
+        ofType(updateTaskSuccessAction),
+        tap((_) => this._notificationService.showSuccess('Task updated'))
+      ),
+    {
+      dispatch: false,
+    }
+  );
+
+  updateTaskEffect$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(updateTaskAction),
+      switchMap(({ task, id }) => {
+        return this._taskService.updateTask(task, id).pipe(
+          map((task: ITaskResponse) => {
+            return updateTaskSuccessAction({ task });
           })
         );
       })

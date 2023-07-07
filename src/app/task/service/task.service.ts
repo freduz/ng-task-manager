@@ -21,6 +21,16 @@ export class TaskService {
     );
   }
 
+  updateTask(
+    updateData: Partial<ITask>,
+    id: number
+  ): Observable<ITaskResponse> {
+    return this._http.put<ITaskResponse>(
+      `http://localhost:8080/api/v1/tasks/${id}`,
+      updateData
+    );
+  }
+
   // getById(id: number): Observable<ITask> {
   //   return this._http.get();
   // }
@@ -33,5 +43,5 @@ export class TaskService {
   //   return this._http.delete();
   //}
 
-  constructor(private _http: HttpClient) {}
+  constructor(private readonly _http: HttpClient) {}
 }

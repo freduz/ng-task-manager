@@ -7,8 +7,16 @@
     </p>
   </div>
   <div class="more-info">
-    <span>{{ task.status }}</span>
-    <span>{{ task.dueDate }}</span>
+    <select
+      [value]="task.status"
+      class="form-select status-selector"
+      #statusChanger
+    >
+      <option value="pending">Pending</option>
+      <option value="completed">Completed</option>
+      <option value="inProgress">In progresss</option>
+    </select>
+    <span>Due on {{ task.dueDate | date }}</span>
   </div>
   <div class="btn-area">
     <button class="btn btn-light">

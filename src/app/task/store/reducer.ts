@@ -6,6 +6,7 @@ import {
   addTaskSuccessAction,
   loadAllTasksAction,
   loadAllTasksSuccessAction,
+  updateTaskSuccessAction,
 } from './actions/task.actions';
 
 export const initialState: ITaskState = {
@@ -56,7 +57,16 @@ const taskReducer = createReducer(
       isLoading: false,
       tasksLoaded: true,
     })
-  )
+  ),
+  on(updateTaskSuccessAction, (state, { task: updatedTask }): ITaskState => {
+    const updatedTasks = state.tasks.map((task) =>
+      task.id === updatedTask.id ? updatedTask : task
+    );
+    return {
+      ...state,
+      tasks: updatedTasks,
+    };
+  })
 );
 
 export function reducers(state: ITaskState, action: Action) {
