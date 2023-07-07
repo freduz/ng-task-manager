@@ -38,25 +38,17 @@ export class TaskListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.tasks$ = this._store.pipe(select(tasksSelector));
-    combineLatest([this.tasks$, this._filterTask$]).subscribe(
-      ([tasks, status]) => {
-        if (status != 'ALL' && status != '') {
-          this.tasks$ = of(tasks.filter((task) => task.status === status));
-        } else {
-          this.tasks$ = of(tasks);
-        }
-      }
-    );
-
-    combineLatest([this.tasks$, this._sortTask$])
+    combineLatest([this.tasks$, this._filterTask$, this._sortTask$])
       .pipe(
-        map(([tasks, sortOption]) => {
+        map(([tasks, status, sortOption]) => {
+          if (status != 'ALL' && status != '') {
+            tasks = tasks.filter((task) => task.status === status);
+          }
           const sortOrder = sortOption.slice(-3);
           const sortKey = sortOption.slice(0, -3);
-          let sortedTasks: ITaskResponse[] = tasks;
 
           if (sortKey === 'title') {
-            sortedTasks = tasks.slice().sort((a, b) => {
+            tasks = tasks.slice().sort((a, b) => {
               if (sortOrder === 'Asc') {
                 return a.title.localeCompare(b.title);
               } else {
@@ -64,7 +56,7 @@ export class TaskListComponent implements OnInit, AfterViewInit {
               }
             });
           } else if (sortKey === 'dueDate') {
-            sortedTasks = tasks.slice().sort((a, b) => {
+            tasks = tasks.slice().sort((a, b) => {
               const dateA = new Date(a.dueDate).getTime();
               const dateB = new Date(b.dueDate).getTime();
               if (sortOrder === 'Asc') {
@@ -75,7 +67,7 @@ export class TaskListComponent implements OnInit, AfterViewInit {
             });
           }
 
-          return sortedTasks;
+          return tasks;
         })
       )
       .subscribe((sortedTasks) => (this.tasks$ = of(sortedTasks)));
