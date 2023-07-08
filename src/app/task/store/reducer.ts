@@ -6,6 +6,7 @@ import {
   addTaskSuccessAction,
   loadAllTasksAction,
   loadAllTasksSuccessAction,
+  updateTaskAction,
   updateTaskSuccessAction,
 } from './actions/task.actions';
 
@@ -14,6 +15,7 @@ export const initialState: ITaskState = {
   isLoading: false,
   isSaving: false,
   tasksLoaded: false,
+  isUpdating: false,
 };
 
 export const taskFeatureKey = 'tasks';
@@ -58,6 +60,14 @@ const taskReducer = createReducer(
       tasksLoaded: true,
     })
   ),
+  on(
+    updateTaskAction,
+    (state): ITaskState => ({
+      ...state,
+      isUpdating: true,
+    })
+  ),
+
   on(updateTaskSuccessAction, (state, { task: updatedTask }): ITaskState => {
     const updatedTasks = state.tasks.map((task) =>
       task.id === updatedTask.id ? updatedTask : task
@@ -65,6 +75,7 @@ const taskReducer = createReducer(
     return {
       ...state,
       tasks: updatedTasks,
+      isUpdating: false,
     };
   })
 );

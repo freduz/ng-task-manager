@@ -24,11 +24,12 @@ const routes: Routes = [
         ],
       },
       {
-        path: '',
+        path: 'task',
         loadChildren: () =>
           import('../task/task.module').then((m) => m.TaskModule),
         resolve: { tasks: taskResolver },
       },
+      { path: '', redirectTo: 'task', pathMatch: 'full' },
     ],
   },
 ];

@@ -19,6 +19,10 @@ const routes: Routes = [
         component: AddTaskComponent,
         canDeactivate: [deactivateGuard],
       },
+      {
+        path: ':id',
+        component: AddTaskComponent,
+      },
     ],
   },
 ];

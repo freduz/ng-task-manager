@@ -1,12 +1,15 @@
 <div class="container add-task-form">
   <div class="row">
     <div class="col">
-      <h2 class="display-5">Add your task</h2>
+      <h2 class="display-5">{{ !task ? "Add Your Task" : "Edit Task" }}</h2>
     </div>
   </div>
   <div class="row mt-5">
     <div class="col">
-      <form [formGroup]="taskForm" (ngSubmit)="saveTask()">
+      <form
+        [formGroup]="taskForm"
+        (ngSubmit)="!task ? saveTask() : updateTask()"
+      >
         <div class="form-group">
           <tm-input
             [control]="title"
@@ -37,7 +40,7 @@
             class="btn btn-primary"
             [disabled]="taskForm.invalid"
           >
-            Save Task
+            {{ !task ? "Save Task" : "Update task" }}
           </button>
         </div>
       </form>

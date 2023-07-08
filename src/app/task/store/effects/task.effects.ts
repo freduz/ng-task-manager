@@ -15,7 +15,7 @@ import { catchError, map, switchMap, tap, throwError } from 'rxjs';
 import { ITaskResponse } from '../../types/task-response.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { IAppState } from 'src/app/shared/module/top-bar/types/app-state.interface';
+import { IAppState } from 'src/app/store/types/app-state.interface';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Injectable()

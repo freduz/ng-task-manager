@@ -13,6 +13,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ToastrModule } from 'ngx-toastr';
 import { GlobalErrorHandler } from './core/config/global-error-handler';
 import { ServerErrorInterceptor } from './core/interceptors/server-error-interceptor';
+import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
+import { reducers } from './store/reducers';
+import { CustomSerializer } from './store/custom-serializer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,10 +26,15 @@ import { ServerErrorInterceptor } from './core/interceptors/server-error-interce
     TopBarModule,
     HttpClientModule,
     NgxSpinnerModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([]),
     ToastrModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      routerState: RouterState.Minimal,
+      serializer: CustomSerializer,
+    }),
   ],
   providers: [
     {
