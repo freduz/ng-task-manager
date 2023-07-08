@@ -9,7 +9,7 @@ import {
 import { ITask } from '../../types/task.interface';
 import { fromEvent, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { IAppState } from 'src/app/shared/module/top-bar/types/app-state.interface';
+import { IAppState } from 'src/app/store/types/app-state.interface';
 import { updateTaskAction } from '../../store/actions/task.actions';
 import { ITaskResponse } from '../../types/task-response.interface';
 

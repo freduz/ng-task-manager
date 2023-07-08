@@ -7,4 +7,5 @@ export interface ITaskState {
   isLoading: boolean;
   isSaving: boolean;
   tasksLoaded: boolean;
+  isUpdating: boolean;
 }

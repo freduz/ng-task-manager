@@ -17,7 +17,7 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { IAppState } from 'src/app/shared/module/top-bar/types/app-state.interface';
+import { IAppState } from 'src/app/store/types/app-state.interface';
 import { tasksSelector } from '../../store/selector';
 import { ITaskResponse } from '../../types/task-response.interface';
 
