@@ -9,13 +9,11 @@ import { Store, select } from '@ngrx/store';
 import {
   BehaviorSubject,
   Observable,
-  catchError,
   combineLatest,
   fromEvent,
   map,
   of,
   tap,
-  throwError,
 } from 'rxjs';
 import { IAppState } from 'src/app/store/types/app-state.interface';
 import { tasksSelector } from '../../store/selector';

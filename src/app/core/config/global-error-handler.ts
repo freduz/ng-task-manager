@@ -12,8 +12,23 @@ export class GlobalErrorHandler implements ErrorHandler {
     const notifier = this._injector.get(NotificationService);
 
     if (error instanceof HttpErrorResponse) {
+      console.log(error);
       message = errorService.getServerMessage(error);
-      notifier.showError(message);
+      switch (error.status) {
+        case 404:
+          try {
+            const [, errorMsg] = Object.values(message);
+            notifier.showError(errorMsg);
+          } catch (error) {
+            console.log(error);
+          }
+          break;
+        case 401:
+          notifier.showError('Your are not authorized');
+          break;
+
+        default:
+      }
     }
   }
 }

@@ -10,4 +10,8 @@ export enum ActionTypes {
   UPDATE_TASK = '[Task] Update task',
   UPDATE_TASK_SUCCESS = '[Task] Update task success',
   UPDATE_TASK_FAILURE = '[Task] Update task failure',
+
+  DELETE_TASK = '[Task] Delete task',
+  DELETE_TASK_SUCCESS = '[Task] Delete task success',
+  DELETE_TASK_FAILURE = '[Task] Delete task failure',
 }
