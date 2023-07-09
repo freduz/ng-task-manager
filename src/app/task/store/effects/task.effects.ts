@@ -5,6 +5,9 @@ import {
   addTaskAction,
   addTaskFailureTask,
   addTaskSuccessAction,
+  deleteTaskAction,
+  deleteTaskFailureAction,
+  deleteTaskSuccessAction,
   loadAllTasksAction,
   loadAllTasksSuccessAction,
   updateTaskAction,
@@ -28,7 +31,6 @@ export class TaskEffects {
           map((task: ITaskResponse) => {
             return addTaskSuccessAction({ task });
           }),
-          tap((_) => {}),
           catchError((error: HttpErrorResponse) => {
             this._store.dispatch(addTaskFailureTask());
             return throwError(error);
@@ -56,6 +58,21 @@ export class TaskEffects {
         return this._taskService.updateTask(task, id).pipe(
           map((task: ITaskResponse) => {
             return updateTaskSuccessAction({ task });
+          })
+        );
+      })
+    )
+  );
+
+  deleteTaskEffect$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(deleteTaskAction),
+      switchMap(({ taskId }) => {
+        return this._taskService.delete(taskId).pipe(
+          map((_) => deleteTaskSuccessAction()),
+          catchError((err: HttpErrorResponse) => {
+            this._store.dispatch(deleteTaskFailureAction());
+            return throwError(err);
           })
         );
       })

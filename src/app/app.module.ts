@@ -17,6 +17,13 @@ import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 import { reducers } from './store/reducers';
 import { CustomSerializer } from './store/custom-serializer';
 
+import {
+  NgxAwesomePopupModule,
+  DialogConfigModule,
+  ConfirmBoxConfigModule,
+  ToastNotificationConfigModule,
+} from '@costlydeveloper/ngx-awesome-popup';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -26,6 +33,8 @@ import { CustomSerializer } from './store/custom-serializer';
     TopBarModule,
     HttpClientModule,
     NgxSpinnerModule,
+    NgxAwesomePopupModule.forRoot(),
+    ConfirmBoxConfigModule.forRoot(),
     StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([]),
     ToastrModule.forRoot(),

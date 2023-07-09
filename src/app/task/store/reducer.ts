@@ -4,6 +4,7 @@ import {
   addTaskAction,
   addTaskFailureTask,
   addTaskSuccessAction,
+  deleteTaskAction,
   loadAllTasksAction,
   loadAllTasksSuccessAction,
   updateTaskAction,
@@ -67,7 +68,6 @@ const taskReducer = createReducer(
       isUpdating: true,
     })
   ),
-
   on(updateTaskSuccessAction, (state, { task: updatedTask }): ITaskState => {
     const updatedTasks = state.tasks.map((task) =>
       task.id === updatedTask.id ? updatedTask : task
@@ -76,6 +76,13 @@ const taskReducer = createReducer(
       ...state,
       tasks: updatedTasks,
       isUpdating: false,
+    };
+  }),
+  on(deleteTaskAction, (state, { taskId }): ITaskState => {
+    const filteredState = state.tasks.filter((state) => state.id != taskId);
+    return {
+      ...state,
+      tasks: filteredState,
     };
   })
 );

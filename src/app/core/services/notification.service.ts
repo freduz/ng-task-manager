@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -13,8 +12,6 @@ export class NotificationService {
   }
 
   showError(message: string): void {
-    Object.values(message).forEach((error) => {
-      this._toaster.error(error);
-    });
+    this._toaster.error(message);
   }
 }
