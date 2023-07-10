@@ -11,12 +11,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
+
 import { ILoginRequest } from '../../types/login-request.interface';
 import { loginAction } from '../../store/actions/login.actions';
 import { IAppState } from 'src/app/store/types/app-state.interface';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { isLoggedIn, isSubmitting } from '../../store/selector';
+import { isSubmitting } from '../../store/selector';
 
 @Component({
   selector: 'app-login',

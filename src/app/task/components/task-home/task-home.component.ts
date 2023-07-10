@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-task-home',
   templateUrl: './task-home.component.html',
-  styleUrls: ['./task-home.component.css']
+  styleUrls: ['./task-home.component.css'],
 })
-export class TaskHomeComponent {
-
-}
+export class TaskHomeComponent {}

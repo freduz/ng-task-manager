@@ -26,18 +26,33 @@
         style="--bs-scroll-height: 100px"
       >
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/task"
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            aria-current="page"
+            routerLink="/task"
+            [routerLinkActiveOptions]="{ exact: true }"
             >Your Tasks</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="task/add">Add Task</a>
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="task/add"
+            >Add Task</a
+          >
         </li>
       </ul>
 
       <nav class="d-flex justify-content-between gap-5">
         <ng-container *ngIf="!(isLoggedIn$ | async); else nonAuthState">
-          <a class="nav-link" routerLink="/"
+          <a
+            class="nav-link"
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -53,7 +68,11 @@
             Login</a
           >
 
-          <a class="nav-link" routerLink="auth/register"
+          <a
+            class="nav-link"
+            routerLink="auth/register"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
