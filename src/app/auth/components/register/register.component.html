@@ -1,46 +1,48 @@
-<div class="w-100 d-flex justify-content-center align-items-center">
-  <div class="login-form mt-5 gap-3" style="width: 40%">
-    <h2>Registration Page</h2>
-    <div class="form-controls mt-4 d-flex flex-column justify-content-between">
-      <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
-        <div class="mb-3">
-          <tm-input type="email" [control]="email" label="Email"></tm-input>
-        </div>
-        <div class="mb-3">
-          <tm-input
-            type="text"
-            [control]="firstName"
-            label="First name"
-          ></tm-input>
-        </div>
-        <div class="mb-3">
-          <tm-input
-            type="text"
-            [control]="lastName"
-            label="Last name"
-          ></tm-input>
-        </div>
-        <div class="mb-3">
-          <tm-input
-            type="password"
-            [control]="password"
-            label="Password"
-          ></tm-input>
-        </div>
-        <div class="mb-3">
-          <span
-            >Already have an account ?
-            <a [routerLink]="['../login']">Login</a></span
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-6 mt-5">
+      <h2 class="text-center">Registration Page</h2>
+      <div class="form-controls mt-4">
+        <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+          <div class="mb-3">
+            <tm-input type="email" [control]="email" label="Email"></tm-input>
+          </div>
+          <div class="mb-3">
+            <tm-input
+              type="text"
+              [control]="firstName"
+              label="First name"
+            ></tm-input>
+          </div>
+          <div class="mb-3">
+            <tm-input
+              type="text"
+              [control]="lastName"
+              label="Last name"
+            ></tm-input>
+          </div>
+          <div class="mb-3">
+            <tm-input
+              type="password"
+              [control]="password"
+              label="Password"
+            ></tm-input>
+          </div>
+          <div class="mb-3 text-center">
+            <span
+              >Already have an account ?
+              <a [routerLink]="['../login']">Login</a></span
+            >
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary btn-block"
+            [disabled]="registerForm.invalid"
           >
-        </div>
-        <button
-          type="submit"
-          class="btn btn-primary"
-          [disabled]="registerForm.invalid"
-        >
-          Register
-        </button>
-      </form>
+            Register
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
