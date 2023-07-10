@@ -9,6 +9,9 @@
   <span *ngIf="control.errors?.required" class="badge text-bg-danger"
     >{{ label }} is required</span
   >
+  <span *ngIf="control.errors?.email" class="badge text-bg-danger"
+    >Invalid email</span
+  >
   <span *ngIf="control.errors?.minlength" class="badge text-bg-danger"
     >{{ label }} you entered is
     {{ control.errors?.minlength.actualLength }} characters long. it must be
