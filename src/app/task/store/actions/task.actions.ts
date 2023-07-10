@@ -48,3 +48,5 @@ export const deleteTaskSuccessAction = createAction(
 export const deleteTaskFailureAction = createAction(
   ActionTypes.DELETE_TASK_FAILURE
 );
+
+export const taskStateResetAction = createAction(ActionTypes.RESET_TASK_STATE);

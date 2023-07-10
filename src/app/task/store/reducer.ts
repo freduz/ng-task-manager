@@ -7,6 +7,7 @@ import {
   deleteTaskAction,
   loadAllTasksAction,
   loadAllTasksSuccessAction,
+  taskStateResetAction,
   updateTaskAction,
   updateTaskSuccessAction,
 } from './actions/task.actions';
@@ -84,7 +85,8 @@ const taskReducer = createReducer(
       ...state,
       tasks: filteredState,
     };
-  })
+  }),
+  on(taskStateResetAction, (): ITaskState => initialState)
 );
 
 export function reducers(state: ITaskState, action: Action) {

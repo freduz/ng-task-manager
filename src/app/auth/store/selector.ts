@@ -7,3 +7,18 @@ export const isLoggedIn = createSelector(
   authStateFeatureSelector,
   (state: IAuthState) => state.isLoggedIn
 );
+
+export const isLoading = createSelector(
+  authStateFeatureSelector,
+  (state: IAuthState) => state.isLoading
+);
+
+export const CurrentUser = createSelector(
+  authStateFeatureSelector,
+  (state: IAuthState) => state.currentUser
+);
+
+export const currentUsername = createSelector(
+  authStateFeatureSelector,
+  (state: IAuthState) => state.currentUser?.firstName
+);

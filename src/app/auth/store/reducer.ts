@@ -8,6 +8,7 @@ import {
   loginFailureAction,
   loginSuccessAction,
 } from './actions/login.actions';
+import { logoutSuccessAction } from './actions/logout.actions';
 
 export const authFeatureKey = 'auth';
 
@@ -16,7 +17,6 @@ const initialState: IAuthState = {
   isSubmitting: false,
   currentUser: null,
   isLoggedIn: false,
-  accessToken: undefined,
 };
 
 export const authReducer = createReducer(
@@ -34,12 +34,7 @@ export const authReducer = createReducer(
       ...state,
       isSubmitting: false,
       isLoggedIn: true,
-      currentUser: {
-        firstName: authResponse.firstName,
-        lastName: authResponse.lastName,
-        email: authResponse.lastName,
-      },
-      accessToken: authResponse.accessToken,
+      currentUser: authResponse,
     })
   ),
   on(
@@ -61,7 +56,12 @@ export const authReducer = createReducer(
     currentUserSuccessAction,
     (state, { currentUser }): IAuthState => ({
       ...state,
-      currentUser,
+      currentUser: {
+        firstName: currentUser.firstName,
+        lastName: currentUser.lastName,
+        email: currentUser.email,
+        accessToken: '',
+      },
       isLoading: false,
       isLoggedIn: true,
     })
@@ -73,7 +73,8 @@ export const authReducer = createReducer(
       isLoading: false,
       isLoggedIn: false,
     })
-  )
+  ),
+  on(logoutSuccessAction, (state): IAuthState => initialState)
 );
 
 export function reducer(state: IAuthState, action: Action) {
