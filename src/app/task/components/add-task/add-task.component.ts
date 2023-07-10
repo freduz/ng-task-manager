@@ -61,9 +61,11 @@ export class AddTaskComponent
   }
 
   ngOnInit(): void {
-    this._store.pipe(select(getTaskByIdSelector)).subscribe((task) => {
-      this.task = task as ITaskResponse;
-    });
+    this._store
+      .pipe(select(getTaskByIdSelector), takeUntil(this._unsubscribe$))
+      .subscribe((task) => {
+        this.task = task as ITaskResponse;
+      });
     this._store
       .pipe(select(isSavingSelector), takeUntil(this._unsubscribe$))
       .subscribe((saving) => {

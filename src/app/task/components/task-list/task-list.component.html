@@ -1,5 +1,12 @@
 <div class="row mt-5 p-4 align-items-center">
-  <div class="col-md-4"><h2 class="display-4">Your tasks</h2></div>
+  <ng-container *ngIf="tasks$ | async as tasks">
+    <ng-container *ngIf="tasks.length > 0; else noTasks">
+      <div class="col-md-4"><h2 class="display-4">Your tasks</h2></div>
+    </ng-container>
+  </ng-container>
+  <ng-template #noTasks>
+    <h2 class="display-4">No tasks to display</h2>
+  </ng-template>
   <div class="col-md-4">
     <label for="">Filter by</label>
     <select class="form-select" #taskFilter>
@@ -21,7 +28,7 @@
 </div>
 <div class="task-list">
   <tm-task-item
-    *ngFor="let task of tasks$ | async"
+    *ngFor="let task of tasks$ | async; trackBy: trackById"
     [task]="task"
   ></tm-task-item>
 </div>

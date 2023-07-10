@@ -7,6 +7,7 @@ import { logoutAction, logoutSuccessAction } from '../actions/logout.actions';
 import { Store } from '@ngrx/store';
 import { IAppState } from 'src/app/store/types/app-state.interface';
 import { taskStateResetAction } from 'src/app/task/store/actions/task.actions';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Injectable()
 export class LogoutEffects {
@@ -25,7 +26,12 @@ export class LogoutEffects {
     () =>
       this._actions$.pipe(
         ofType(logoutSuccessAction),
-        tap((_) => this._router.navigate(['auth', 'login']))
+        tap((_) => {
+          this._notificationService.showSuccess(
+            'logged out from the application'
+          );
+          this._router.navigate(['auth', 'login']);
+        })
       ),
     {
       dispatch: false,
@@ -36,6 +42,7 @@ export class LogoutEffects {
     private _router: Router,
     private readonly _persistenceService: PersistanceService,
     private _actions$: Actions,
-    private _store: Store<IAppState>
+    private _store: Store<IAppState>,
+    private _notificationService: NotificationService
   ) {}
 }
