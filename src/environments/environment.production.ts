@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'http://task-app-back-end.us-east-1.elasticbeanstalk.com/api/v1',
+  apiUrl: 'https://task-mgmt-backend-production.up.railway.app/api/v1',
 };
