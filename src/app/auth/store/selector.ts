@@ -22,3 +22,8 @@ export const currentUsername = createSelector(
   authStateFeatureSelector,
   (state: IAuthState) => state.currentUser?.firstName
 );
+
+export const isSubmitting = createSelector(
+  authStateFeatureSelector,
+  (state: IAuthState) => state.isSubmitting
+);

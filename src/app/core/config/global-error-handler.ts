@@ -22,7 +22,6 @@ export class GlobalErrorHandler implements ErrorHandler {
         case 401:
           notifier.showError(error?.error?.message ?? 'Logged out');
           this._router.navigateByUrl('/');
-
           break;
         case 400:
           notifier.showError(error?.error?.message ?? 'Bad client request');
