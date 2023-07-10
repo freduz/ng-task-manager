@@ -23,6 +23,8 @@ import {
   ConfirmBoxConfigModule,
   ToastNotificationConfigModule,
 } from '@costlydeveloper/ngx-awesome-popup';
+import { AuthModule } from './auth/auth.module';
+import { AuthInterceptor } from './core/interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,6 +35,7 @@ import {
     TopBarModule,
     HttpClientModule,
     NgxSpinnerModule,
+    AuthModule,
     NgxAwesomePopupModule.forRoot(),
     ConfirmBoxConfigModule.forRoot(),
     StoreModule.forRoot(reducers, {}),
@@ -54,6 +57,11 @@ import {
     {
       provide: ErrorHandler,
       useClass: GlobalErrorHandler,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
     },
   ],
 

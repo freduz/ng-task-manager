@@ -125,7 +125,7 @@ export class AddTaskComponent
           this._spinner.show();
         } else {
           this._spinner.hide();
-          this._router.navigateByUrl('');
+          this._router.navigateByUrl('task');
         }
       });
   }

@@ -21,6 +21,11 @@ const routes: Routes = [
             path: 'login',
             component: LoginComponent,
           },
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'login',
+          },
         ],
       },
       {
@@ -29,7 +34,7 @@ const routes: Routes = [
           import('../task/task.module').then((m) => m.TaskModule),
         resolve: { tasks: taskResolver },
       },
-      { path: '', redirectTo: 'task', pathMatch: 'full' },
+      { path: '', redirectTo: 'auth', pathMatch: 'full' },
     ],
   },
 ];

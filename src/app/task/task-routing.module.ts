@@ -23,6 +23,11 @@ const routes: Routes = [
         path: ':id',
         component: AddTaskComponent,
       },
+      {
+        path: '',
+        redirectTo: '',
+        pathMatch: 'full',
+      },
     ],
   },
 ];

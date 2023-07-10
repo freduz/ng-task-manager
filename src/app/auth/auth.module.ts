@@ -2,16 +2,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-
-
+import { RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { authFeatureKey, reducer } from './store/reducer';
+import { FormControlsModule } from '../shared/module/form-controls/form-controls.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
+import { LoginEffects } from './store/effects/login.effects';
 
 @NgModule({
-  declarations: [
-    RegisterComponent,
-    LoginComponent
-  ],
+  declarations: [RegisterComponent, LoginComponent],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    StoreModule.forFeature(authFeatureKey, reducer),
+    EffectsModule.forFeature([LoginEffects]),
+    FormControlsModule,
+  ],
+  exports: [LoginComponent, RegisterComponent],
 })
-export class AuthModule { }
+export class AuthModule {}

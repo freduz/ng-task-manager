@@ -1,3 +1,3 @@
 export const environment = {
-  api: 'fredux',
+  apiUrl: 'http://taskmgmt.us-east-1.elasticbeanstalk.com/api/v1',
 };
