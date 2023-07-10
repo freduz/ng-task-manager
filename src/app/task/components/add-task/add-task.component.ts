@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -27,6 +32,7 @@ import { Router } from '@angular/router';
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddTaskComponent
   implements OnInit, IDeactivateComponent, OnDestroy
