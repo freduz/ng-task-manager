@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { isLoggedIn } from 'src/app/auth/store/selector';
+import { logoutAction } from 'src/app/auth/store/actions/logout.actions';
+
+import { currentUsername, isLoggedIn } from 'src/app/auth/store/selector';
 import { IAppState } from 'src/app/store/types/app-state.interface';
 
 @Component({
@@ -11,10 +13,15 @@ import { IAppState } from 'src/app/store/types/app-state.interface';
 })
 export class TopBarComponent implements OnInit {
   isLoggedIn$!: Observable<boolean>;
+  username$!: Observable<string | undefined>;
   constructor(private _store: Store<IAppState>) {}
 
   ngOnInit(): void {
     this.isLoggedIn$ = this._store.pipe(select(isLoggedIn));
-    this.isLoggedIn$.subscribe(console.log);
+    this.username$ = this._store.pipe(select(currentUsername));
+  }
+
+  logout(): void {
+    this._store.dispatch(logoutAction());
   }
 }

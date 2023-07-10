@@ -9,6 +9,8 @@ import { FormControlsModule } from '../shared/module/form-controls/form-controls
 import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { LoginEffects } from './store/effects/login.effects';
+import { LogoutEffects } from './store/effects/logut.effects';
+import { RegisterEffects } from './store/effects/register.effects';
 
 @NgModule({
   declarations: [RegisterComponent, LoginComponent],
@@ -17,7 +19,7 @@ import { LoginEffects } from './store/effects/login.effects';
     RouterModule,
     ReactiveFormsModule,
     StoreModule.forFeature(authFeatureKey, reducer),
-    EffectsModule.forFeature([LoginEffects]),
+    EffectsModule.forFeature([LoginEffects, LogoutEffects, RegisterEffects]),
     FormControlsModule,
   ],
   exports: [LoginComponent, RegisterComponent],

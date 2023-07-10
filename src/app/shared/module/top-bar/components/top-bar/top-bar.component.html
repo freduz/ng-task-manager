@@ -26,7 +26,7 @@
         style="--bs-scroll-height: 100px"
       >
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/"
+          <a class="nav-link active" aria-current="page" routerLink="/task"
             >Your Tasks</a
           >
         </li>
@@ -70,7 +70,27 @@
           >
         </ng-container>
         <ng-template #nonAuthState>
-          <a class="nav-link" routerLink="auth/register">
+          <span
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-person-circle"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+              <path
+                fill-rule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+              />
+            </svg>
+            &nbsp;
+            <span class="badge text-bg-primary">{{
+              username$ | async
+            }}</span></span
+          >
+          <button class="nav-link" (click)="logout()">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -88,20 +108,10 @@
                 d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
               />
             </svg>
-            Logout</a
-          >
+            Logout
+          </button>
         </ng-template>
       </nav>
-
-      <!-- <form class="d-flex" role="search">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form> -->
     </div>
   </div>
 </nav>

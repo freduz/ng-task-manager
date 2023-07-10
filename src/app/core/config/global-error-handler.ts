@@ -13,7 +13,6 @@ export class GlobalErrorHandler implements ErrorHandler {
     const notifier = this._injector.get(NotificationService);
 
     if (error instanceof HttpErrorResponse) {
-      console.log(error);
       message = errorService.getServerMessage(error);
       switch (error.status) {
         case 404:
@@ -21,14 +20,13 @@ export class GlobalErrorHandler implements ErrorHandler {
           notifier.showError(errorMsg);
           break;
         case 401:
-          try {
-            notifier.showError(error?.error?.message ?? 'Logged out');
-            this._router.navigateByUrl('/');
-          } catch (error) {
-            console.log(error);
-          }
-          break;
+          notifier.showError(error?.error?.message ?? 'Logged out');
+          this._router.navigateByUrl('/');
 
+          break;
+        case 400:
+          notifier.showError(error?.error?.message ?? 'Bad client request');
+          break;
         default:
       }
     }

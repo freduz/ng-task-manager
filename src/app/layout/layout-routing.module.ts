@@ -4,6 +4,8 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from '../auth/components/register/register.component';
 import { LoginComponent } from '../auth/components/login/login.component';
 import { taskResolver } from '../core/resolvers/task.resolver';
+import { authGuardGuard } from '../core/guards/auth-guard.guard';
+import { protectResourceGuard } from '../core/guards/protect-resource.guard';
 
 const routes: Routes = [
   {
@@ -12,6 +14,7 @@ const routes: Routes = [
     children: [
       {
         path: 'auth',
+        canActivate: [authGuardGuard],
         children: [
           {
             path: 'register',
@@ -30,6 +33,7 @@ const routes: Routes = [
       },
       {
         path: 'task',
+        canActivate: [protectResourceGuard],
         loadChildren: () =>
           import('../task/task.module').then((m) => m.TaskModule),
         resolve: { tasks: taskResolver },
