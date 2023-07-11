@@ -1,27 +1,53 @@
-# TaskManager
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
+# Taskify - Efficient Task Management Application
 
-## Development server
+Taskify is a powerful and user-friendly software solution developed using Spring Boot and Angular frameworks. It is designed to help individuals efficiently manage their tasks, track progress, and improve productivity.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Demo
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Front end : https://ng-task-manager.vercel.app
 
-## Build
+Back end  : https://task-mgmt-backend-production.up.railway.app/swagger-ui/index.html
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Tech Stack
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+**Client:** Angular,Ngrx,Rxjs,Bootstrap
 
-## Further help
+**Server:** Java, Spring boot
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Authors
+
+- [@Fredy Daniel](https://github.com/freduz)
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/freduz/ng-task-manager.git
+```
+
+Go to the project directory
+
+```bash
+  cd ng-task-manager
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  ng serve --open
+```
+
